@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAU;EACR,OAAO,EAAE,GAAG;EACZ,OAAO,EAAE,GAAG;EACZ,gBAAgB,EAAE,KAAK",
+"sources": ["beauty.sass"],
+"names": [],
+"file": "beauty.css"
+}
