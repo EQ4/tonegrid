@@ -27,18 +27,27 @@ $(function() {
 
         var svgDoc = objTag.getSVGDocument();
 
-        svgDoc.onmouseover = function(event) {
-            var targetId = event.target.id;
+        svgDoc.onclick = function(event) {
+          var target = event.target;
+          while (target != null) {
+            if (target.id != null && target.id != "") {
+              console.log("Delegated Target:", target.id);
+              break;
+            } else {
+              target = target.parentElement;
+            }
+          }
 
-            console.log("Target: \t" + targetId);
+          if (target != null) {
+            targetId = target.id;
 
             if (targetId.charAt(0) == 'i') {
                 var note = parseInt(targetId.substr(1));
-                console.log("Note: \t\t" + note);
+                console.log("Note: " + note);
                 s.decay = ms(rndi(50,1000));
                 s.note(note);
-
             }
+          }
         }
     });
 });
