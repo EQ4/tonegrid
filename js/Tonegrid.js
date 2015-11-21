@@ -29,14 +29,32 @@ function onCellLoaded() {
                 .css({
                     display: 'block', // the prototype we're copying from is hidden--unhide these
                     position: 'absolute',
-                    left: 50 + x * 60,
-                    top: 50 + y * 60
+                    left: 50 + x * 144,
+                    top: 50 + y * 144
                 });
         }
     }
     $('.NoteRing').hide();
     $('.Outside').hide();
     $("[class^='pInd']").hide();
+}
+
+function handleClick(cellId, buttonName) {
+    // e.g. : "i_4_5", "Layer_1"
+
+    // what follows is demo-hack code.  Don't trust it.
+    $(".Outside").hide();
+    $(".NoteRing").hide();
+
+    $("#" + cellId + " .Outside").show();
+    $("#" + cellId + " .NoteRing").show();
+
+    if (buttonName.charAt(0) == 'i') {
+        var note = parseInt(buttonName.substr(1));
+        console.log("Note: " + note);
+        s.decay = ms(rndi(50, 1000));
+        s.note(note);
+    }
 }
 
 $(function() {
@@ -46,7 +64,7 @@ $(function() {
     var container = $('#container');
     container.on('click', '.cellDiv', function(evt) {
         console.log("which cell", evt.currentTarget.id);
-        
+
         var target = evt.target;
 
         while (target != null) {
@@ -54,14 +72,10 @@ $(function() {
             if (targetClassList.length > 0) {
                 // found a named SVG element, i.e. a UI item
                 console.log("which UI element", target.classList[0]);
+
+                handleClick(evt.currentTarget.id, target.classList[0]);
                 break;
 
-                // if (targetId.charAt(0) == 'i') {
-                //     var note = parseInt(targetId.substr(1));
-                //     console.log("Note: " + note);
-                //     s.decay = ms(rndi(50, 1000));
-                //     s.note(note);
-                // }
             } else {
                 target = target.parentElement;
             }
