@@ -18,49 +18,43 @@ function initGibber() {
     });
 }
 
+function onCellLoaded() {
+    for (var i = 0; i < 48; i++) {
+        $('#cellPrototype')
+            .clone()
+            .appendTo('#container')
+            .css({
+                display: 'block', // the prototype we're copying from is hidden--unhide these
+                position: 'absolute',
+                left: 50 + (Math.floor(i) % 8) * 60,
+                top: 50 + Math.floor(Math.floor(i) / 8) * 60
+            });
+    }
+}
+
 $(function() {
 
-  for(var i=0; i<48; i++) {
-    $('#cellObject')
-      .clone()
-      .appendTo('body')
-      .css({ 
-        position: 'absolute',
-        left: 50 + (Math.floor(i) % 8) * 60,
-        top: 50 + Math.floor(Math.floor(i) / 8) * 60
-      }); 
-  }
-    
     initGibber();
 
-    var objTag = document.getElementById('cellObject');
-    objTag.addEventListener('load', function() {
-
-        var svgDoc = objTag.getSVGDocument();
-
-        svgDoc.onclick = function(event) {
-          var target = event.target;
-          while (target != null) {
-            if (target.id != null && target.id != "") {
-              console.log("Delegated Target:", target.id);
-              break;
-            } else {
-              target = target.parentElement;
-            }
-          }
-
-          if (target != null) {
-            targetId = target.id;
-
-            if (targetId.charAt(0) == 'i') {
-                var note = parseInt(targetId.substr(1));
-                console.log("Note: " + note);
-                s.decay = ms(rndi(50,1000));
-                s.note(note);
-            }
-          }
-        }
+    var container = $('#container');
+    container.on('click', '#NoteRing', function(evt) {
+        console.log("current", evt.currentTarget);
+        console.log("delagate", evt.delegateTarget);
     });
+
+    $("#cellPrototype").load("svg/cell.svg", onCellLoaded);
+
+    //     if (target != null) {
+    //         targetId = target.id;
+    //         if (targetId.charAt(0) == 'i') {
+    //             var note = parseInt(targetId.substr(1));
+    //             console.log("Note: " + note);
+    //             s.decay = ms(rndi(50, 1000));
+    //             s.note(note);
+    //         }
+    //     }
+    // }
+
 });
 
 /*
