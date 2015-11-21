@@ -19,16 +19,19 @@ function initGibber() {
 }
 
 function onCellLoaded() {
-    for (var i = 0; i < 48; i++) {
-        $('#cellPrototype')
-            .clone()
-            .appendTo('#container')
-            .css({
-                display: 'block', // the prototype we're copying from is hidden--unhide these
-                position: 'absolute',
-                left: 50 + (Math.floor(i) % 8) * 60,
-                top: 50 + Math.floor(Math.floor(i) / 8) * 60
-            });
+    for (var x = 0; x < 8; x++) {
+        for (var y = 0; y < 6; y++) {
+            $('#cellPrototype')
+                .clone()
+                .attr('id', 'i_' + x + '_' + y)
+                .appendTo('#container')
+                .css({
+                    display: 'block', // the prototype we're copying from is hidden--unhide these
+                    position: 'absolute',
+                    left: 50 + x * 60,
+                    top: 50 + y * 60
+                });
+        }
     }
 }
 
@@ -39,7 +42,7 @@ $(function() {
     var container = $('#container');
     container.on('click', '#NoteRing', function(evt) {
         console.log("current", evt.currentTarget);
-        console.log("delagate", evt.delegateTarget);
+        console.log("delegate", evt.delegateTarget);
     });
 
     $("#cellPrototype").load("svg/cell.svg", onCellLoaded);
@@ -58,9 +61,9 @@ $(function() {
 });
 
 /*
-   // Display framerate
-   var iv = setInterval(function() {
-   console.log(frame);
-   frame = 0;
-   }, 1000);
+// Display framerate
+var iv = setInterval(function() {
+console.log(frame);
+frame = 0;
+}, 1000);
 */
