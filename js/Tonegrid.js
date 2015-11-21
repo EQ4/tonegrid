@@ -24,6 +24,7 @@ function onCellLoaded() {
             $('#cellPrototype')
                 .clone()
                 .attr('id', 'i_' + x + '_' + y)
+                .attr('class', 'cellDiv')
                 .appendTo('#container')
                 .css({
                     display: 'block', // the prototype we're copying from is hidden--unhide these
@@ -40,23 +41,31 @@ $(function() {
     initGibber();
 
     var container = $('#container');
-    container.on('click', '#NoteRing', function(evt) {
-        console.log("current", evt.currentTarget);
-        console.log("delegate", evt.delegateTarget);
+    container.on('click', '.cellDiv', function(evt) {
+        console.log("which cell", evt.currentTarget.id);
+        
+        var target = evt.target;
+
+        while (target != null) {
+            var targetClassList = target.classList;
+            if (targetClassList.length > 0) {
+                // found a named SVG element, i.e. a UI item
+                console.log("which UI element", target.classList[0]);
+                break;
+
+                // if (targetId.charAt(0) == 'i') {
+                //     var note = parseInt(targetId.substr(1));
+                //     console.log("Note: " + note);
+                //     s.decay = ms(rndi(50, 1000));
+                //     s.note(note);
+                // }
+            } else {
+                target = target.parentElement;
+            }
+        }
     });
 
     $("#cellPrototype").load("svg/cell.svg", onCellLoaded);
-
-    //     if (target != null) {
-    //         targetId = target.id;
-    //         if (targetId.charAt(0) == 'i') {
-    //             var note = parseInt(targetId.substr(1));
-    //             console.log("Note: " + note);
-    //             s.decay = ms(rndi(50, 1000));
-    //             s.note(note);
-    //         }
-    //     }
-    // }
 
 });
 
