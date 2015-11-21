@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,UAAU;EACR,OAAO,EAAE,GAAG;EACZ,OAAO,EAAE,GAAG;EACZ,gBAAgB,EAAE,KAAK",
+"mappings": "AAAA,UAAU;EACR,OAAO,EAAE,GAAG;EACZ,OAAO,EAAE,GAAG;EACZ,gBAAgB,EAAE,KAAK;EACvB,MAAM,EAAE,IAAI",
 "sources": ["beauty.sass"],
 "names": [],
 "file": "beauty.css"
