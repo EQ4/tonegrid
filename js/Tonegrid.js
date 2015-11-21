@@ -20,6 +20,17 @@ function initGibber() {
 
 $(function() {
 
+  for(var i=0; i<48; i++) {
+    $('#cellObject')
+      .clone()
+      .appendTo('body')
+      .css({ 
+        position: 'absolute',
+        left: 50 + (Math.floor(i) % 8) * 60,
+        top: 50 + Math.floor(Math.floor(i) / 8) * 60
+      }); 
+  }
+    
     initGibber();
 
     var objTag = document.getElementById('cellObject');
