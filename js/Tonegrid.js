@@ -33,6 +33,9 @@ function onCellLoaded() {
                 });
         }
     }
+    $('.NoteRing').hide();
+    $('.Outside').hide();
+    $("[class^='pInd']").hide();
 }
 
 $(function() {
